@@ -16,3 +16,10 @@ To deploy the image to a container:
 
 or to run in the background:
 > docker run -d -p 2022:22 debian-bare-ansible
+
+To build and deploy from Ansible:
+=================================
+You can also build and deploy the container using ansible.
+
+> cd ansible/
+> ansible-playbook -l local-container deploy-container.yml
