@@ -1,0 +1,2 @@
+# Don't push my own public key to the repository
+allowedcontainerkey.pub
