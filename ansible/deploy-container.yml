@@ -10,6 +10,13 @@
     local_ssh_port: 2022
     local_http_port: 8043
   tasks:
+    - name: Install Python interface to Docker
+      local_action:
+        module: pip
+        name:
+          - docker
+        state: present
+
     - name: Copy SSH public key
       local_action:
         module: copy
