@@ -5,7 +5,9 @@
 FROM debian:stable
 
 # Environment and Arg variables
+ENV container docker
 ARG USERNAME=ansible
+
 # expose port 22 to the host machine, for SSH access
 EXPOSE 22
 
@@ -30,8 +32,8 @@ RUN chown $USERNAME /home/$USERNAME/.ssh/authorized_keys && \
     chmod 600 /home/$USERNAME/.ssh/authorized_keys
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-# Copy and run the entrypoint
-COPY entrypoint.sh entrypoint.sh
-RUN chmod +x /entrypoint.sh
 
-CMD ["/entrypoint.sh"]
+# Systemd must by stopped with SIGRTMIN+3
+# This is required for `docker stop` to function properly.
+STOPSIGNAL SIGRTMIN+3
+CMD ["/usr/lib/systemd/systemd"]
