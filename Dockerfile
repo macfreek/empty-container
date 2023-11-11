@@ -32,6 +32,11 @@ RUN chown $USERNAME /home/$USERNAME/.ssh/authorized_keys && \
     chmod 600 /home/$USERNAME/.ssh/authorized_keys
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+# To allow the container to run in unprivileged mode, 
+# systemd needs write access to these directories:
+# /tmp, /run, /run/lock, /tmp, /var/lib/journal, /sys/fs/cgroup/systemd
+VOLUME [ "/tmp", "/run", "/run/lock", "/var/lib/journal" ]
+WORKDIR /
 
 # Systemd must by stopped with SIGRTMIN+3
 # This is required for `docker stop` to function properly.
