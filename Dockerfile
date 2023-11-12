@@ -14,6 +14,7 @@ EXPOSE 22
 # Add required packages
 RUN apt-get update
 RUN apt-get install -y openssh-server sudo
+RUN apt-get install -y python3
 # Remove not needed packages
 RUN apt-get autoremove -y
 RUN apt-get autoclean -y
