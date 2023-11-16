@@ -5,6 +5,7 @@
   gather_facts: false
   vars:
     docker_image_name: "debian-bare-ansible"
+    docker_image_tag: "latest"
     docker_container_name: "test-container-1"
     docker_build_path: "{{ playbook_dir | dirname }}"
     local_ssh_port: 2022
@@ -43,6 +44,7 @@
         build:
           pull: true
           path: "{{docker_build_path}}"
+      register: build_image
       # Compare the id of the image we already had with the id of the image we just build.
       changed_when: (prev_image.images[0].Id | default(0, true)) != build_image.image.Id
 
