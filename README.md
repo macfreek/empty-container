@@ -29,7 +29,7 @@ To deploy the imager in non-privileged container:
 It is also possible to run in non-privileged most, but this is non-trivial.
 
 First of all, systemd needs write access to these directories:
-/tmp, /run, /run/lock, /tmp, and /var/lib/journal
+/tmp, /run, /run/lock, and /var/lib/journal
 This has been configured in the Dockerfile.
 
 In addition, it expects /sys/fs/cgroup to be mounted (maybe be read-only),
@@ -89,6 +89,15 @@ You can also build and deploy the container using ansible.
 
     cd ansible/
     ansible-playbook -l local-container deploy-container.yml
+
+To log in to the container:
+===========================
+
+    ssh 127.0.0.1 -l ansible  -p 2022
+
+The container contains your id_rsa.pub public key in ~ansibls/.ssh/authorized_keys,
+so you should be able to log in without password.
+
 
 Related work:
 =============
